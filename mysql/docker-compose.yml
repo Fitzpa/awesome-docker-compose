@@ -1,0 +1,26 @@
+# A Docker Compose must always start with the version tag.
+# We use '3' because it's the last version.
+version: "3"
+
+services:
+
+  db:
+    # Official Postgres image from DockerHub (we use the last version)
+    image: "mysql:latest"
+
+    cap_add:
+      - SYS_NICE
+    restart: always
+    ports:
+      - 3306:3306
+
+    # The `env_file` tag allows us to declare an environment file
+    env_file:
+     - .env # The name of your environment file (the one at the repository root)
+
+    volumes:
+      - db:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+volumes:
+  db:
+    driver: local

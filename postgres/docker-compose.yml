@@ -2,11 +2,12 @@ version: "3.7"
 
 services:
   postgres:
-    container_name: postgres_container
+    container_name: postgres_container_wedding
     image: postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      POSTGRES_DB: weddingdb
       PGDATA: /data/postgres
     volumes:
       - postgres:/data/postgres
